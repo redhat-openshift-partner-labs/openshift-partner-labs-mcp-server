@@ -6,25 +6,23 @@ MCP Server to work with OpenShift Partner Labs. This MCP server is designed to o
 ![Project Status](https://img.shields.io/badge/status-active-brightgreen)
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 
-The Managed Cluster Provisioner (MCP) Server is the backend API layer designed to power an AI-driven chatbot interface for managing OpenShift clusters.
-
 ## Purpose and Philosophy
 
-This server is **not** a traditional REST API that provides a one-to-one mapping of database interactions. Instead, its core philosophy is to **aggregate low-level interactions into high-level, conversational actions** that can be easily used by an AI chatbot.
+This server is **not** a traditional REST API that provides a one-to-one mapping of database interactions. Instead, its core philosophy is to **aggregate low-level interactions into high-level, conversational actions** that can be easily used by an AI agent.
 
 The primary goal is to address the challenges of traditional UIs, such as:
 
 * **High development overhead:** Reducing the developer "cycles" needed for UI changes.
-* **Developer dependency:** Empowering users to perform routine operational tasks (like changing a cluster's state) via the chatbot without needing a developer.
+* **Developer dependency:** Empowering users to perform routine operational tasks (like changing a cluster's state) via the agent without needing a developer.
 * **Complex workflows:** Simplifying processes like cluster provisioning into guided, natural language conversations.
 
-Developers contributing to this server should always consider if they are providing a tool, prompt, or resource that empowers the chatbot to fulfill a high-level user request, rather than simply exposing a raw backend function.
+Developers contributing to this server should always consider if they are providing a tool, prompt, or resource that empowers the agent to fulfill a high-level user request, rather than simply exposing a raw backend function.
 
 ## High-Level Architecture
 
-This server functions as the critical **API Layer** in our new AI-driven architecture, sitting between the chatbot service and the backend database.
+This server functions as the critical **API Layer** in our new AI-driven architecture, sitting between the agent and the backend database.
 
-`[User] <--> [Chat Interface] <--> [AI Chatbot Service] <--> [MCP Server] <--> [MySQL Database]`
+`[User] <--> [Chat Interface] <--> [AI Agent] <--> [MCP Server] <--> [MySQL Database]`
 
 ## Prerequisites
 
