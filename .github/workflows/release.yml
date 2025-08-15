@@ -186,25 +186,25 @@ jobs:
             # Generate changelog since previous tag
             CHANGELOG=$(git log $PREV_TAG..${{ needs.validate.outputs.version }} --pretty=format:"- %s (%h)" --reverse)
           fi
-          
+
           # Write changelog to file for multiline support
           cat > CHANGELOG.md << 'EOF'
           ## What's Changed
-          
+
           $CHANGELOG
-          
+
           ## Container Images
-          
+
           - `ghcr.io/${{ github.repository }}:${{ needs.validate.outputs.tag_version }}`
           - `ghcr.io/${{ github.repository }}:latest`
-          
+
           ## Installation
-          
+
           ### Python Package
           ```bash
           pip install openshift-partner-labs-mcp-server==${{ needs.validate.outputs.tag_version }}
           ```
-          
+
           ### Container
           ```bash
           podman run ghcr.io/${{ github.repository }}:${{ needs.validate.outputs.tag_version }}

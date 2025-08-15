@@ -148,13 +148,13 @@ The server supports multiple transport protocols that can be configured via the 
    ```bash
    # Method 1: Direct Python execution
    python -m openshift_partner_labs_mcp_server.src.main
-   
+
    # Method 2: Using installed script (after pip install -e .)
    openshift-partner-labs-mcp-server
-   
+
    # Method 3: Container development (recommended)
    make dev
-   
+
    # Method 4: Direct container commands
    podman-compose up --build
    ```
