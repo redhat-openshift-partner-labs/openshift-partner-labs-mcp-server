@@ -2,6 +2,7 @@
 
 A Model Context Protocol (MCP) server designed specifically for OpenShift Partner Labs, providing high-level conversational operations for lab managers, administrators, and developers. This server aggregates low-level database interactions into AI-friendly tools that enable natural language workflows.
 
+[![CI Status](https://github.com/redhat-openshift-partner-labs/openshift-partner-labs-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/redhat-openshift-partner-labs/openshift-partner-labs-mcp-server/actions/workflows/ci.yml)
 ![Project Status](https://img.shields.io/badge/status-active-brightgreen)
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 
