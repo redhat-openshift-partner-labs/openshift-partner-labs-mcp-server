@@ -216,8 +216,16 @@ The project includes complete OpenShift deployment configurations optimized for 
 ### Quick Deployment
 
 ```bash
-# Apply the deployment
+# Option 1: Use published container images (recommended)
+# The openshift/ configurations automatically use the latest published images
 oc apply -k openshift/
+
+# Option 2: Deploy specific version
+# Edit openshift/kustomization.yaml to specify image version
+# images:
+#   - name: openshift-partner-labs-mcp-server
+#     newName: ghcr.io/mrhillsman/openshift-partner-labs-mcp-server
+#     newTag: v0.2.0
 
 # Check deployment status
 oc get pods -n <your-namespace>
@@ -285,12 +293,97 @@ pre-commit run --all-files
 # Test container build and execution
 pytest tests/test_container.py -v
 
-# Build container manually
-podman build -t openshift-partner-labs-mcp-server .
+# Option 1: Use pre-built image from GitHub Container Registry
+podman run -p 8080:8080 ghcr.io/mrhillsman/openshift-partner-labs-mcp-server:latest
 
-# Run container
+# Option 2: Build container manually
+podman build -t openshift-partner-labs-mcp-server .
 podman run -p 8080:8080 openshift-partner-labs-mcp-server
 ```
+
+## Releases
+
+### Overview
+
+This project uses automated GitHub Actions workflows for tag-based releases. When you push a version tag, the system automatically:
+
+- **Validates quality**: Runs pre-commit hooks, tests, and type checking
+- **Builds artifacts**: Creates Python packages and multi-platform container images
+- **Creates releases**: Generates GitHub releases with changelogs and downloadable assets
+- **Publishes images**: Pushes container images to GitHub Container Registry
+
+### Creating a Release
+
+Follow these steps to create a new release:
+
+1. **Update the version** in `pyproject.toml`:
+   ```bash
+   # Edit pyproject.toml and update the version field
+   vim pyproject.toml
+   # Example: version = "0.2.0"
+   ```
+
+2. **Commit the version change**:
+   ```bash
+   git add pyproject.toml
+   git commit -m "Bump version to 0.2.0"
+   git push origin main
+   ```
+
+3. **Create and push the release tag**:
+   ```bash
+   git tag v0.2.0
+   git push origin v0.2.0
+   ```
+
+4. **Monitor the release**: GitHub Actions will automatically:
+   - Run quality checks and tests
+   - Build Python packages and container images
+   - Create a GitHub release with generated changelog
+   - Publish artifacts for download
+
+### Version Guidelines
+
+- **Follow semantic versioning**: `major.minor.patch` (e.g., `1.2.3`)
+- **Tag format**: Always prefix with `v` (e.g., `v0.2.0`)
+- **Version consistency**: The version in `pyproject.toml` must exactly match the git tag
+- **Pre-releases**: Versions < 1.0.0 are automatically marked as pre-release
+
+### Release Artifacts
+
+Each release produces:
+
+**Python Packages**:
+- Wheel distribution (`.whl`)
+- Source distribution (`.tar.gz`)
+- Available on GitHub Releases page
+
+**Container Images**:
+- Multi-platform images (linux/amd64, linux/arm64)
+- Published to GitHub Container Registry
+- Tagged with version and `latest`
+
+**Installation Examples**:
+```bash
+# Install specific version
+pip install openshift-partner-labs-mcp-server==0.2.0
+
+# Use container image
+podman run ghcr.io/mrhillsman/openshift-partner-labs-mcp-server:v0.2.0
+
+# Use latest container image
+podman run ghcr.io/mrhillsman/openshift-partner-labs-mcp-server:latest
+```
+
+### Release Validation
+
+Before creating a release, ensure:
+- All tests pass: `pytest`
+- Code quality checks pass: `ruff check --fix && ruff format`
+- Type checking passes: `mypy .`
+- Pre-commit hooks pass: `pre-commit run --all-files`
+
+The automated workflow will fail if any of these checks don't pass.
 
 ## Examples
 
@@ -348,6 +441,21 @@ We welcome contributions! Please follow these guidelines when contributing to th
 - **Ruff** for linting and formatting (enforced by pre-commit)
 - **pytest** for testing with good coverage
 - **Conventional commits** for clear change history
+
+### Release Guidelines
+
+For maintainers creating releases:
+
+- **Version Updates**: Only update versions in `pyproject.toml` when preparing for release
+- **Release Timing**: Create releases for significant feature additions, bug fixes, or security updates
+- **Version Bumping**: Follow semantic versioning:
+  - **Patch** (0.1.1): Bug fixes and minor improvements
+  - **Minor** (0.2.0): New features that are backward compatible
+  - **Major** (1.0.0): Breaking changes or major milestones
+- **Pre-release Testing**: Ensure all automated checks pass before tagging
+- **Release Notes**: The automated workflow generates changelogs, but consider adding manual release notes for major releases
+- **Container Images**: All releases automatically publish multi-platform container images
+- **Coordination**: For major releases, coordinate with the team and update documentation as needed
 
 ### Areas for Contribution
 

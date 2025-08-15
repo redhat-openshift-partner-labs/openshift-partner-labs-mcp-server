@@ -1,0 +1,30 @@
+# Global ownership - all files require review from project maintainers
+* @mrhillsman
+
+# Source code ownership
+/openshift_partner_labs_mcp_server/ @mrhillsman
+
+# Test ownership
+/tests/ @mrhillsman
+
+# Configuration files
+/pyproject.toml @mrhillsman
+/.pre-commit-config.yaml @mrhillsman
+/Makefile @mrhillsman
+
+# Container and deployment files
+/Containerfile @mrhillsman
+/compose.yaml @mrhillsman
+/openshift/ @mrhillsman
+
+# GitHub Actions and CI/CD
+/.github/ @mrhillsman
+
+# Documentation
+/README.md @mrhillsman
+/CLAUDE.md @mrhillsman
+/LICENSE @mrhillsman
+
+# Environment and configuration
+/.env.example @mrhillsman
+/.gitignore @mrhillsman
