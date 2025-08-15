@@ -5,7 +5,9 @@ from unittest.mock import Mock, mock_open, patch
 
 import pytest
 
-from openshift_partner_labs_mcp_server.src.tools.code_review_tool import generate_code_review_prompt
+from openshift_partner_labs_mcp_server.src.tools.code_review_tool import (
+    generate_code_review_prompt,
+)
 from openshift_partner_labs_mcp_server.src.tools.multiply_tool import multiply_numbers
 from openshift_partner_labs_mcp_server.src.tools.redhat_logo_tool import get_redhat_logo
 

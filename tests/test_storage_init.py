@@ -3,7 +3,9 @@ class TestStorageInit:
 
     def test_storage_service_import(self):
         """Test that StorageService can be imported from storage module."""
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         # Should be able to import StorageService
         assert StorageService is not None
@@ -11,7 +13,9 @@ class TestStorageInit:
 
     def test_storage_service_instantiation(self):
         """Test that StorageService can be instantiated."""
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         # Should be able to create instance with default parameters
         service = StorageService()
@@ -21,7 +25,9 @@ class TestStorageInit:
 
     def test_storage_service_instantiation_custom_params(self):
         """Test StorageService instantiation with custom parameters."""
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         service = StorageService(host="custom_host", port=5433, database="custom_db")
         assert service.host == "custom_host"

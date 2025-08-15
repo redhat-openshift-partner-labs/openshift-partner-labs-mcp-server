@@ -189,7 +189,9 @@ class TestMain:
         mock_settings.MCP_SSL_KEYFILE = None
         mock_settings.MCP_SSL_CERTFILE = None
 
-        with patch("openshift_partner_labs_mcp_server.src.main.settings", mock_settings):
+        with patch(
+            "openshift_partner_labs_mcp_server.src.main.settings", mock_settings
+        ):
             # Act
             main()
 
@@ -211,7 +213,9 @@ class TestMain:
         mock_settings.MCP_SSL_KEYFILE = "/path/to/key.pem"
         mock_settings.MCP_SSL_CERTFILE = "/path/to/cert.pem"
 
-        with patch("openshift_partner_labs_mcp_server.src.main.settings", mock_settings):
+        with patch(
+            "openshift_partner_labs_mcp_server.src.main.settings", mock_settings
+        ):
             # Act
             main()
 

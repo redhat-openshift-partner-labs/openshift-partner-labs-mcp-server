@@ -14,7 +14,9 @@ class TestSettings:
     def test_default_settings(self):
         """Test default settings configuration."""
         # Arrange
-        with patch("openshift_partner_labs_mcp_server.src.settings.Settings") as mock_settings_class:
+        with patch(
+            "openshift_partner_labs_mcp_server.src.settings.Settings"
+        ) as mock_settings_class:
             mock_settings = Mock()
             mock_settings.MCP_HOST = "0.0.0.0"
             mock_settings.MCP_PORT = 4000
@@ -36,7 +38,9 @@ class TestSettings:
     def test_port_validation(self):
         """Test port validation logic."""
         # Arrange
-        with patch("openshift_partner_labs_mcp_server.src.settings.Settings") as mock_settings_class:
+        with patch(
+            "openshift_partner_labs_mcp_server.src.settings.Settings"
+        ) as mock_settings_class:
             mock_settings = Mock()
             mock_settings.MCP_PORT = 4000
             mock_settings_class.return_value = mock_settings
@@ -53,7 +57,9 @@ class TestSettings:
         """Test log level validation logic."""
         # Arrange
         valid_levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-        with patch("openshift_partner_labs_mcp_server.src.settings.Settings") as mock_settings_class:
+        with patch(
+            "openshift_partner_labs_mcp_server.src.settings.Settings"
+        ) as mock_settings_class:
             mock_settings = Mock()
             mock_settings.PYTHON_LOG_LEVEL = "INFO"
             mock_settings_class.return_value = mock_settings
@@ -70,7 +76,9 @@ class TestSettings:
         """Test transport protocol validation logic."""
         # Arrange
         valid_protocols = ["streamable-http", "sse", "http"]
-        with patch("openshift_partner_labs_mcp_server.src.settings.Settings") as mock_settings_class:
+        with patch(
+            "openshift_partner_labs_mcp_server.src.settings.Settings"
+        ) as mock_settings_class:
             mock_settings = Mock()
             mock_settings.MCP_TRANSPORT_PROTOCOL = "streamable-http"
             mock_settings_class.return_value = mock_settings
@@ -100,8 +108,12 @@ class TestServer:
     def test_server_initialization(self):
         """Test that server can be initialized."""
         with (
-            patch("openshift_partner_labs_mcp_server.src.mcp.settings") as mock_settings,
-            patch("openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"),
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.settings"
+            ) as mock_settings,
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"
+            ),
             patch("openshift_partner_labs_mcp_server.src.mcp.FastMCP"),
         ):
             mock_settings.PYTHON_LOG_LEVEL = "INFO"
@@ -113,8 +125,12 @@ class TestServer:
     def test_server_has_mcp_tools(self):
         """Test that server has MCP tools registered."""
         with (
-            patch("openshift_partner_labs_mcp_server.src.mcp.settings") as mock_settings,
-            patch("openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"),
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.settings"
+            ) as mock_settings,
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"
+            ),
             patch("openshift_partner_labs_mcp_server.src.mcp.FastMCP"),
         ):
             mock_settings.PYTHON_LOG_LEVEL = "INFO"
@@ -124,8 +140,12 @@ class TestServer:
     def test_server_mcp_instance(self):
         """Test that server has a valid FastMCP instance."""
         with (
-            patch("openshift_partner_labs_mcp_server.src.mcp.settings") as mock_settings,
-            patch("openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"),
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.settings"
+            ) as mock_settings,
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"
+            ),
             patch("openshift_partner_labs_mcp_server.src.mcp.FastMCP"),
         ):
             mock_settings.PYTHON_LOG_LEVEL = "INFO"
@@ -136,7 +156,9 @@ class TestServer:
     def test_transport_protocol_configuration(self):
         """Test transport protocol configuration."""
         # Arrange
-        with patch("openshift_partner_labs_mcp_server.src.settings.Settings") as mock_settings_class:
+        with patch(
+            "openshift_partner_labs_mcp_server.src.settings.Settings"
+        ) as mock_settings_class:
             mock_settings = Mock()
             mock_settings.MCP_TRANSPORT_PROTOCOL = "streamable-http"
             mock_settings_class.return_value = mock_settings
@@ -266,7 +288,9 @@ class TestConfiguration:
     def test_environment_variable_handling(self):
         """Test environment variable handling."""
         # Arrange
-        with patch("openshift_partner_labs_mcp_server.src.settings.Settings") as mock_settings_class:
+        with patch(
+            "openshift_partner_labs_mcp_server.src.settings.Settings"
+        ) as mock_settings_class:
             mock_settings = Mock()
             mock_settings.MCP_HOST = "0.0.0.0"
             mock_settings.MCP_PORT = 4000
@@ -284,7 +308,9 @@ class TestConfiguration:
     def test_ssl_configuration(self):
         """Test SSL configuration handling."""
         # Arrange
-        with patch("openshift_partner_labs_mcp_server.src.settings.Settings") as mock_settings_class:
+        with patch(
+            "openshift_partner_labs_mcp_server.src.settings.Settings"
+        ) as mock_settings_class:
             mock_settings = Mock()
             mock_settings.MCP_SSL_KEYFILE = "/path/to/key.pem"
             mock_settings.MCP_SSL_CERTFILE = "/path/to/cert.pem"

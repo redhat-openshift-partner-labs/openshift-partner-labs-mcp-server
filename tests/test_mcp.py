@@ -99,9 +99,13 @@ class TestTemplateMCPServer:
         """Test that server has required attributes for tools-first architecture."""
         # Arrange & Act
         with (
-            patch("openshift_partner_labs_mcp_server.src.mcp.settings") as mock_settings,
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.settings"
+            ) as mock_settings,
             patch("openshift_partner_labs_mcp_server.src.mcp.FastMCP"),
-            patch("openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"),
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"
+            ),
         ):
             mock_settings.PYTHON_LOG_LEVEL = "INFO"
             server = TemplateMCPServer()
@@ -114,9 +118,13 @@ class TestTemplateMCPServer:
         """Test that server adheres to tools-first architecture by not having resource/prompt methods."""
         # Arrange & Act
         with (
-            patch("openshift_partner_labs_mcp_server.src.mcp.settings") as mock_settings,
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.settings"
+            ) as mock_settings,
             patch("openshift_partner_labs_mcp_server.src.mcp.FastMCP"),
-            patch("openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"),
+            patch(
+                "openshift_partner_labs_mcp_server.src.mcp.force_reconfigure_all_loggers"
+            ),
         ):
             mock_settings.PYTHON_LOG_LEVEL = "INFO"
             server = TemplateMCPServer()

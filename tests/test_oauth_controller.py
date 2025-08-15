@@ -113,7 +113,8 @@ class TestOAuthControllerHandleCallback:
                 "openshift_partner_labs_mcp_server.src.oauth.controller.OAuth2Handler"
             ) as mock_handler,
             patch(
-                "openshift_partner_labs_mcp_server.src.oauth.controller.api_module", create=True
+                "openshift_partner_labs_mcp_server.src.oauth.controller.api_module",
+                create=True,
             ) as mock_api_module,
         ):
             mock_handler.get_access_token_from_authorization_code_flow.return_value = (
@@ -920,7 +921,9 @@ class TestRefreshTokenGrantEdgeCases:
     @pytest.mark.asyncio
     async def test_invalid_refresh_token(self):
         """Test with invalid refresh token."""
-        from openshift_partner_labs_mcp_server.src.oauth.models import RefreshTokenRequest
+        from openshift_partner_labs_mcp_server.src.oauth.models import (
+            RefreshTokenRequest,
+        )
 
         token_request = RefreshTokenRequest(
             grant_type="refresh_token",
@@ -950,7 +953,9 @@ class TestRefreshTokenGrantEdgeCases:
     @pytest.mark.asyncio
     async def test_invalid_client_credentials_refresh(self):
         """Test refresh token grant with invalid client credentials."""
-        from openshift_partner_labs_mcp_server.src.oauth.models import RefreshTokenRequest
+        from openshift_partner_labs_mcp_server.src.oauth.models import (
+            RefreshTokenRequest,
+        )
 
         token_request = RefreshTokenRequest(
             grant_type="refresh_token",
@@ -980,7 +985,9 @@ class TestRefreshTokenGrantEdgeCases:
     @pytest.mark.asyncio
     async def test_successful_refresh_with_snowflake_token(self):
         """Test successful refresh token grant with Snowflake token."""
-        from openshift_partner_labs_mcp_server.src.oauth.models import RefreshTokenRequest
+        from openshift_partner_labs_mcp_server.src.oauth.models import (
+            RefreshTokenRequest,
+        )
 
         token_request = RefreshTokenRequest(
             grant_type="refresh_token",
@@ -1024,7 +1031,9 @@ class TestRefreshTokenGrantEdgeCases:
     @pytest.mark.asyncio
     async def test_snowflake_refresh_failure_fallback(self):
         """Test fallback when Snowflake token refresh fails."""
-        from openshift_partner_labs_mcp_server.src.oauth.models import RefreshTokenRequest
+        from openshift_partner_labs_mcp_server.src.oauth.models import (
+            RefreshTokenRequest,
+        )
 
         token_request = RefreshTokenRequest(
             grant_type="refresh_token",
@@ -1060,7 +1069,9 @@ class TestRefreshTokenGrantEdgeCases:
     @pytest.mark.asyncio
     async def test_successful_refresh_without_snowflake_token(self):
         """Test successful refresh token grant without Snowflake token."""
-        from openshift_partner_labs_mcp_server.src.oauth.models import RefreshTokenRequest
+        from openshift_partner_labs_mcp_server.src.oauth.models import (
+            RefreshTokenRequest,
+        )
 
         token_request = RefreshTokenRequest(
             grant_type="refresh_token",

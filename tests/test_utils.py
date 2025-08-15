@@ -84,14 +84,19 @@ class TestPylogger:
             assert hasattr(logger, "critical")
 
     @patch("openshift_partner_labs_mcp_server.utils.pylogger.structlog")
-    @patch("openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False)
+    @patch(
+        "openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False
+    )
     def test_get_python_logger_structlog_configuration(self, mock_structlog):
         """Test that structlog is configured correctly."""
         # Arrange
         mock_structlog.get_logger.return_value = Mock()
 
         # Act
-        with patch("openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False):
+        with patch(
+            "openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED",
+            False,
+        ):
             get_python_logger()
 
         # Assert
@@ -105,7 +110,10 @@ class TestPylogger:
         mock_structlog.get_logger.return_value = Mock()
 
         # Act
-        with patch("openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False):
+        with patch(
+            "openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED",
+            False,
+        ):
             get_python_logger()
 
         # Assert
@@ -125,7 +133,10 @@ class TestPylogger:
         mock_structlog.get_logger.return_value = Mock()
 
         # Act
-        with patch("openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False):
+        with patch(
+            "openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED",
+            False,
+        ):
             get_python_logger()
 
         # Assert
@@ -140,7 +151,10 @@ class TestPylogger:
         mock_structlog.get_logger.return_value = Mock()
 
         # Act
-        with patch("openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False):
+        with patch(
+            "openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED",
+            False,
+        ):
             get_python_logger()
 
         # Assert
@@ -158,7 +172,10 @@ class TestPylogger:
         mock_structlog.get_logger.return_value = Mock()
 
         # Act
-        with patch("openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False):
+        with patch(
+            "openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED",
+            False,
+        ):
             get_python_logger()
 
         # Assert
@@ -173,7 +190,10 @@ class TestPylogger:
         mock_structlog.get_logger.return_value = Mock()
 
         # Act
-        with patch("openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED", False):
+        with patch(
+            "openshift_partner_labs_mcp_server.utils.pylogger._LOGGING_CONFIGURED",
+            False,
+        ):
             get_python_logger()
 
         # Assert
@@ -248,7 +268,10 @@ class TestPylogger:
         try:
             import openshift_partner_labs_mcp_server.utils.pylogger
 
-            assert openshift_partner_labs_mcp_server.utils.pylogger.get_python_logger is not None
+            assert (
+                openshift_partner_labs_mcp_server.utils.pylogger.get_python_logger
+                is not None
+            )
         except ImportError as e:
             pytest.fail(f"Module should be importable: {e}")
 

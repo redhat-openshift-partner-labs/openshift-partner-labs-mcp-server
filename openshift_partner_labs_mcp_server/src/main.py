@@ -7,8 +7,13 @@ import uvicorn
 
 from openshift_partner_labs_mcp_server.src.api import app
 from openshift_partner_labs_mcp_server.src.settings import settings
-from openshift_partner_labs_mcp_server.src.settings import validate_config as validate_config_func
-from openshift_partner_labs_mcp_server.utils.pylogger import get_python_logger, get_uvicorn_log_config
+from openshift_partner_labs_mcp_server.src.settings import (
+    validate_config as validate_config_func,
+)
+from openshift_partner_labs_mcp_server.utils.pylogger import (
+    get_python_logger,
+    get_uvicorn_log_config,
+)
 
 # Initialize logger
 logger = get_python_logger()

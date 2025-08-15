@@ -48,7 +48,9 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     logger.info("Initializing storage service...")
     try:
         if settings.ENABLE_AUTH:
-            from openshift_partner_labs_mcp_server.src.oauth.service import initialize_storage
+            from openshift_partner_labs_mcp_server.src.oauth.service import (
+                initialize_storage,
+            )
 
             storage_service = await initialize_storage()
             logger.info("Storage service initialized successfully")
@@ -186,7 +188,9 @@ class LocalDevelopmentAuthorizationMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
 
         try:
-            from openshift_partner_labs_mcp_server.src.oauth.handler import OAuth2Handler
+            from openshift_partner_labs_mcp_server.src.oauth.handler import (
+                OAuth2Handler,
+            )
 
             authorization_url, state = OAuth2Handler.get_authorization_url()
 

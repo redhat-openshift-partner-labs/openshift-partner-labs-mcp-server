@@ -26,7 +26,9 @@ class FastMCPClient:
 
         # MCP configuration
         self.config = {
-            "mcpServers": {"openshift_partner_labs_mcp_server": {"url": f"{server_url}/mcp"}}
+            "mcpServers": {
+                "openshift_partner_labs_mcp_server": {"url": f"{server_url}/mcp"}
+            }
         }
 
     def check_server_health(self):

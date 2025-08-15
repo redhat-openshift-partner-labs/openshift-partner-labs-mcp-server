@@ -105,7 +105,9 @@ class TestStorageService:
     @pytest.mark.asyncio
     async def test_get_storage_service_not_initialized(self):
         """Test getting storage service when not initialized."""
-        with patch("openshift_partner_labs_mcp_server.src.oauth.service._storage_service", None):
+        with patch(
+            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service", None
+        ):
             with pytest.raises(RuntimeError, match="Storage service not initialized"):
                 await get_storage_service()
 
@@ -114,7 +116,8 @@ class TestStorageService:
         """Test getting storage service when initialized."""
         mock_storage = Mock()
         with patch(
-            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service", mock_storage
+            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service",
+            mock_storage,
         ):
             result = await get_storage_service()
             assert result == mock_storage
@@ -157,7 +160,9 @@ class TestStorageService:
     @pytest.mark.asyncio
     async def test_initialize_storage_missing_config(self):
         """Test storage initialization with missing configuration."""
-        with patch("openshift_partner_labs_mcp_server.src.oauth.service._storage_service", None):
+        with patch(
+            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service", None
+        ):
             with patch(
                 "openshift_partner_labs_mcp_server.src.oauth.service.settings"
             ) as mock_settings:
@@ -176,7 +181,8 @@ class TestStorageService:
         """Test storage initialization when already initialized."""
         mock_storage = Mock()
         with patch(
-            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service", mock_storage
+            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service",
+            mock_storage,
         ):
             result = await initialize_storage()
             assert result == mock_storage
@@ -188,7 +194,8 @@ class TestStorageService:
         mock_storage.disconnect = AsyncMock()
 
         with patch(
-            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service", mock_storage
+            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service",
+            mock_storage,
         ):
             await cleanup_storage()
             mock_storage.disconnect.assert_called_once()
@@ -196,7 +203,9 @@ class TestStorageService:
     @pytest.mark.asyncio
     async def test_cleanup_storage_without_service(self):
         """Test storage cleanup when no service exists."""
-        with patch("openshift_partner_labs_mcp_server.src.oauth.service._storage_service", None):
+        with patch(
+            "openshift_partner_labs_mcp_server.src.oauth.service._storage_service", None
+        ):
             # Should not raise any exception
             await cleanup_storage()
 
@@ -695,7 +704,9 @@ class TestOAuthServiceEdgeCases:
     async def test_validate_authorization_code_expired(self):
         """Test validation of expired authorization code."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_authorization_code.return_value = {
@@ -715,7 +726,9 @@ class TestOAuthServiceEdgeCases:
     async def test_validate_authorization_code_not_found(self):
         """Test validation of non-existent authorization code."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_authorization_code.return_value = None
@@ -730,7 +743,9 @@ class TestOAuthServiceEdgeCases:
     async def test_validate_authorization_code_storage_error(self):
         """Test validation when storage service fails."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_authorization_code.side_effect = Exception(
@@ -746,7 +761,9 @@ class TestOAuthServiceEdgeCases:
     async def test_validate_refresh_token_expired(self):
         """Test validation of expired refresh token."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_refresh_token.return_value = {
@@ -765,7 +782,9 @@ class TestOAuthServiceEdgeCases:
     async def test_validate_refresh_token_missing_expiry(self):
         """Test validation of refresh token without expiry time (should not expire)."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_refresh_token.return_value = {
@@ -785,7 +804,9 @@ class TestOAuthServiceEdgeCases:
     async def test_validate_client_with_secret_mismatch(self):
         """Test client validation with mismatched secret."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_client.return_value = {
@@ -804,7 +825,9 @@ class TestOAuthServiceEdgeCases:
     async def test_validate_client_no_secret_in_store(self):
         """Test client validation when stored client has no secret."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_client.return_value = {
@@ -824,7 +847,9 @@ class TestOAuthServiceEdgeCases:
     async def test_create_authorization_code_with_defaults(self):
         """Test creating authorization code with default values."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.store_authorization_code.return_value = True
@@ -854,7 +879,9 @@ class TestOAuthServiceEdgeCases:
     async def test_register_client_storage_failure(self):
         """Test client registration when storage fails."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_client_by_name_and_redirect_uris.return_value = None
@@ -872,7 +899,9 @@ class TestOAuthServiceEdgeCases:
     async def test_register_client_returns_existing(self):
         """Test that existing client is returned instead of creating new one."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         existing_client = {
             "id": "existing_client_id",
@@ -903,7 +932,9 @@ class TestOAuthServiceEdgeCases:
     async def test_mark_code_as_used_storage_failure(self):
         """Test marking authorization code as used when storage fails."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.delete_authorization_code.side_effect = Exception("Storage error")
@@ -917,7 +948,9 @@ class TestOAuthServiceEdgeCases:
     async def test_token_operations_with_storage_failures(self):
         """Test various token operations when storage fails."""
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         oauth_service = OAuthService(mock_storage)
@@ -955,7 +988,9 @@ class TestOAuthServiceConcurrency:
         import asyncio
 
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         mock_storage = AsyncMock(spec=StorageService)
         mock_storage.get_authorization_code.return_value = {
@@ -984,7 +1019,9 @@ class TestOAuthServiceConcurrency:
         import asyncio
 
         from openshift_partner_labs_mcp_server.src.oauth.service import OAuthService
-        from openshift_partner_labs_mcp_server.src.storage.storage_service import StorageService
+        from openshift_partner_labs_mcp_server.src.storage.storage_service import (
+            StorageService,
+        )
 
         # First call returns None (no existing client), subsequent calls return existing client
         existing_client = {
